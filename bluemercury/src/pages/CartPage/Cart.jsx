@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
   ButtonGroup,
+  Center,
   Divider,
   Flex,
   Grid,
@@ -16,7 +17,52 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon, WarningIcon } from "@chakra-ui/icons";
 import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartData, getcartCount } from "../../Redux/action";
 function Cart() {
+
+ const {Cart_Data,CartCount} = useSelector(state=>state);
+ 
+const dispatch = useDispatch();
+
+ const fetchAndUpdate =async ()=>{
+ try {
+  let res  = await fetch(`http://localhost:3005/Cart`);
+  let res2 = await res.json();
+  dispatch(fetchCartData(res2));
+  dispatch(getcartCount(res2.length))
+ } catch (error) {
+  console.log(error)
+ }
+ }
+ useEffect(()=>{
+fetchAndUpdate();
+ },[])
+ 
+ /*
+This is maintaining totalprice of our cart products
+ */
+ let totalprice = 0;
+
+  /*
+This is maintaining totalprice of our cart products
+ */
+ const RemoveCartItem = async (id)=>{
+let res  = await fetch(`http://localhost:3005/Cart/${id}`,{
+  method : 'DELETE',
+})
+fetchAndUpdate();
+ }
+ const handlequantity =async (id,quantity)=>{
+     await fetch(`http://localhost:3005/Cart/${id}`,{
+  method : 'PATCH',
+  body : JSON.stringify({quantity:quantity}),
+  headers : {
+    'Content-Type': 'application/json'
+  }
+ })
+ fetchAndUpdate();
+ }
   return (
     <Box
 
@@ -64,7 +110,7 @@ function Cart() {
         fontSize={{ base: "20px", md: "22px", lg: "25px", "2xl": "28px" }}
         mt="45px"
       >
-        Your cart (1 item)
+        Your cart ({CartCount} item)
       </Box>
       {/* This is for Total Item in Cart We need to edit  */}
       <Box mt="7px" ml={{ base: "50px", md: "100px", lg: "150px" }}>
@@ -126,73 +172,85 @@ function Cart() {
           }}
         />
         {/* This is for  Items Cart We need to edit  */}
-        <Box
-          padding="20px"
-          display="flex"
-          justifyContent="space-around"
-          mt="15px"
-          ml="-28px"
-          alignItems="center"
-        >
-          <Box>
-            <Flex alignItems="center" ml="-10px">
-              <Image
-                w={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
-                h={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
-                src="https://cdn.shopify.com/s/files/1/0283/0185/2747/products/global_images-635494263008-1_240x240.jpg?v=1658873817"
-              ></Image>
-              <Text
+        {
+          Cart_Data.map((data)=>{  
+            totalprice+=data.ProductCard__Price*data.quantity;
+            localStorage.setItem('totalprice', JSON.stringify(totalprice));
+            return (
+              <Box
+              key={data.id}
+              padding="20px"
+              display="flex"
+              justifyContent="space-around"
+              mt="15px"
+              ml="-28px"
+              alignItems="center"
+            >
+              <Box>
+                <Flex alignItems="center" ml="-10px">
+                  <Image
+                    w={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
+                    h={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
+                    src={data.ProductCard__Image}
+                  ></Image>
+                  <Text
+                    color="#64738a"
+                    fontSize={{
+                      base: "10px",
+                      md: "12px",
+                      lg: "13px",
+                      "2xl": "15px",
+                    }}
+                  >
+                   {data.ProductCard__Title}
+                  </Text>
+                </Flex>
+              </Box>
+              <Box>
+                <Text
+                  color="#64738a"
+                  fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
+                >
+                  ${data.ProductCard__Price}
+                </Text>
+              </Box>
+              <Box>
+                <ButtonGroup
+                  mt="10px"
+                  size={{ base: "sm", md: "md", lg: "md", "2xl": "md" }}
+                  isAttached
+                  variant="outline"
+                >
+                 <IconButton disabled={data.quantity<=1}  aria-label="Reduce Products" icon={<MinusIcon />} onClick={()=>handlequantity(data.id,data.quantity-1)}/>
+                  <Button>{data.quantity}</Button>
+                  <IconButton aria-label="Add Products" icon={<AddIcon />} onClick={()=>handlequantity(data.id,data.quantity+1)}/>
+                  
+                </ButtonGroup>
+                <br />
+                <Button
+                  color="#64738a"
+                  ml="10px"
+                  bg="none"
+                  _active="none"
+                  _hover="none"
+                  border="none"
+                  textDecoration="underline"
+                  onClick={()=>RemoveCartItem(data.id)}
+                >
+                  REMOVE
+                </Button>
+              </Box>
+              <Box
                 color="#64738a"
-                fontSize={{
-                  base: "10px",
-                  md: "12px",
-                  lg: "13px",
-                  "2xl": "15px",
-                }}
+                fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
               >
-                SKINCEUTICALS C E Ferulic
-              </Text>
-            </Flex>
-          </Box>
-          <Box>
-            <Text
-              color="#64738a"
-              fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
-            >
-              169$
-            </Text>
-          </Box>
-          <Box>
-            <ButtonGroup
-              mt="10px"
-              size={{ base: "sm", md: "md", lg: "md", "2xl": "md" }}
-              isAttached
-              variant="outline"
-            >
-              <IconButton aria-label="Add Products" icon={<AddIcon />} />
-              <Button>1</Button>
-              <IconButton aria-label="Reduce Products" icon={<MinusIcon />} />
-            </ButtonGroup>
-            <br />
-            <Button
-              color="#64738a"
-              ml="10px"
-              bg="none"
-              _active="none"
-              _hover="none"
-              border="none"
-              textDecoration="underline"
-            >
-              REMOVE
-            </Button>
-          </Box>
-          <Box
-            color="#64738a"
-            fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
-          >
-            $169
-          </Box>
-        </Box>
+                ${data.ProductCard__Price*data.quantity}
+              </Box>
+            </Box>
+            )
+          })
+        }
+       
         {/* This is for  Items Cart We need to edit  */}
         <hr
           style={{
@@ -290,7 +348,7 @@ function Cart() {
         <Box display='flex' flexDirection='column' mr='20px' >
           {/* Here We need to Show the total Amount */}
           <Box display='flex' justifyContent='flex-end' fontSize={{ base: "16px", md: "18px", lg: "20px",'2xl':'25px'}}
-           color='#12284c' >Subtotal 169$</Box> 
+           color='#12284c' >Subtotal {totalprice}$</Box> 
           <Box color='#a3acba' fontSize={{ base: "9px", md: "8px", lg: "10px",'2xl':'13px'}} mt='8px'>Shipping, Taxes, Beauty Cards, and additional discounts applied at checkout</Box>
         </Box>  
         </Box>
@@ -302,6 +360,16 @@ function Cart() {
           <HStack><Text fontSize='10px'>4 interest-free payments of $19.25 with Klarna. <Text textDecoration='underline' cursor='pointer'>Learn More</Text></Text></HStack>
           </VStack>
           </Box> 
+
+          <Center p='5px' color='#304362' fontSize='24px' fontFamily='sans-serif' mt='70px' fontWeight='light'>EXPERT PICKS UNDER $50</Center>
+          <Center>
+            <Image src="https://drive.google.com/uc?export=view&id=1pekqlEXiwAV8G3-9xH1GY3DS6_gdn53f"></Image>
+          </Center>
+          
+          <Center p='5px' color='#304362' fontSize='24px' fontFamily='sans-serif' mt='70px' fontWeight='light'>BEAUTY LOVERS LIKE YOU ALSO VIEWED</Center>
+          <Center>
+            <Image src="https://drive.google.com/uc?export=view&id=1UxZmEmsq8js5QG93rONQBRrtOuuY5ZiO"></Image>
+          </Center>
     </Box>
   );
 }

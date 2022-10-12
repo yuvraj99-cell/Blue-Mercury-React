@@ -1,0 +1,14 @@
+.tn_div_3{
+    display: none;
+}
+
+@media screen and (max-width:1040px) {
+.tn_div_2{
+    display: none;
+}
+
+.tn_div_3{
+    display: block;
+}
+
+}

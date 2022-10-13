@@ -1,36 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
-  ButtonGroup,
+
   Center,
-  Divider,
+  
   Flex,
   Grid,
   GridItem,
   HStack,
-  IconButton,
+
   Image,
-  Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon, WarningIcon } from "@chakra-ui/icons";
-import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import {  WarningIcon } from "@chakra-ui/icons";
+import { Checkbox } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCartData, getcartCount } from "../../Redux/action";
+import { fetchCartData, getcartCount, gettotalAmount } from "../../Redux/action";
+import { CartItem } from "./CartItem";
+import { Navigate, useNavigate } from "react-router-dom";
 function Cart() {
 
- const {Cart_Data,CartCount} = useSelector(state=>state);
- 
+ const {Cart_Data,CartCount,totalAmount} = useSelector(state=>state);
+ let navigate = useNavigate();
 const dispatch = useDispatch();
+const setCartAmount = (res2)=>{
+const amount = res2.reduce((acc,ele)=>{
+return acc+ (ele.ProductCard__Price*ele.quantity)
+},0)
 
+//console.log(amount + "line no. 31")
+dispatch(gettotalAmount(amount));
+}
  const fetchAndUpdate =async ()=>{
  try {
   let res  = await fetch(`http://localhost:3005/Cart`);
   let res2 = await res.json();
   dispatch(fetchCartData(res2));
-  dispatch(getcartCount(res2.length))
+  dispatch(getcartCount(res2.length));
+  setCartAmount(res2);
  } catch (error) {
   console.log(error)
  }
@@ -38,6 +47,7 @@ const dispatch = useDispatch();
  useEffect(()=>{
 fetchAndUpdate();
  },[])
+ 
  
  /*
 This is maintaining totalprice of our cart products
@@ -174,80 +184,10 @@ fetchAndUpdate();
         {/* This is for  Items Cart We need to edit  */}
         {
           Cart_Data.map((data)=>{  
-            totalprice+=data.ProductCard__Price*data.quantity;
-            localStorage.setItem('totalprice', JSON.stringify(totalprice));
-            return (
-              <Box
-              key={data.id}
-              padding="20px"
-              display="flex"
-              justifyContent="space-around"
-              mt="15px"
-              ml="-28px"
-              alignItems="center"
-            >
-              <Box>
-                <Flex alignItems="center" ml="-10px">
-                  <Image
-                    w={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
-                    h={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
-                    src={data.ProductCard__Image}
-                  ></Image>
-                  <Text
-                    color="#64738a"
-                    fontSize={{
-                      base: "10px",
-                      md: "12px",
-                      lg: "13px",
-                      "2xl": "15px",
-                    }}
-                  >
-                   {data.ProductCard__Title}
-                  </Text>
-                </Flex>
-              </Box>
-              <Box>
-                <Text
-                  color="#64738a"
-                  fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
-                >
-                  ${data.ProductCard__Price}
-                </Text>
-              </Box>
-              <Box>
-                <ButtonGroup
-                  mt="10px"
-                  size={{ base: "sm", md: "md", lg: "md", "2xl": "md" }}
-                  isAttached
-                  variant="outline"
-                >
-                 <IconButton disabled={data.quantity<=1}  aria-label="Reduce Products" icon={<MinusIcon />} onClick={()=>handlequantity(data.id,data.quantity-1)}/>
-                  <Button>{data.quantity}</Button>
-                  <IconButton aria-label="Add Products" icon={<AddIcon />} onClick={()=>handlequantity(data.id,data.quantity+1)}/>
-                  
-                </ButtonGroup>
-                <br />
-                <Button
-                  color="#64738a"
-                  ml="10px"
-                  bg="none"
-                  _active="none"
-                  _hover="none"
-                  border="none"
-                  textDecoration="underline"
-                  onClick={()=>RemoveCartItem(data.id)}
-                >
-                  REMOVE
-                </Button>
-              </Box>
-              <Box
-                color="#64738a"
-                fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
-              >
-                ${data.ProductCard__Price*data.quantity}
-              </Box>
-            </Box>
-            )
+           // totalprice+=data.ProductCard__Price*data.quantity;
+           // localStorage.setItem('totalprice', totalprice);
+          //dispatch(gettotalAmount(totalprice))
+            return <CartItem key={data.id} data={data} handlequantity={handlequantity} RemoveCartItem={RemoveCartItem}/> 
           })
         }
        
@@ -348,14 +288,16 @@ fetchAndUpdate();
         <Box display='flex' flexDirection='column' mr='20px' >
           {/* Here We need to Show the total Amount */}
           <Box display='flex' justifyContent='flex-end' fontSize={{ base: "16px", md: "18px", lg: "20px",'2xl':'25px'}}
-           color='#12284c' >Subtotal {totalprice}$</Box> 
+           color='#12284c' >Subtotal {totalAmount}$</Box> 
           <Box color='#a3acba' fontSize={{ base: "9px", md: "8px", lg: "10px",'2xl':'13px'}} mt='8px'>Shipping, Taxes, Beauty Cards, and additional discounts applied at checkout</Box>
         </Box>  
         </Box>
       
         <Box display='flex' justifyContent='flex-end' mt='40px' >
           <VStack>
-         <Button bg='#12284c' colorScheme='white' pl='150px' pr='150px' pt='25px' pb='25px' rounded='none'>CHECKOUT</Button>
+         <Button bg='#12284c' colorScheme='white' pl='150px' pr='150px' pt='25px' pb='25px' rounded='none' onClick={()=>{
+         navigate('/contact')
+         }}>CHECKOUT</Button>
           <Button bg='#ffc439' colorScheme='white' pl='150px' pr='150px' pt='25px' pb='25px' rounded='5px'><Image width='90px'  src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c530.png"></Image></Button>
           <HStack><Text fontSize='10px'>4 interest-free payments of $19.25 with Klarna. <Text textDecoration='underline' cursor='pointer'>Learn More</Text></Text></HStack>
           </VStack>

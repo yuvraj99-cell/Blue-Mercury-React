@@ -20,47 +20,33 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-let totalPrice = JSON.parse(localStorage.getItem("totalprice")) || 0;
-
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { getAddress } from "../../Redux/action";
+import PromoCodeAndFinalAmount from "./PromoCodeAndFinalAmount";
+const userAddress = {
+  email : '',
+  address : '',
+  apartment : '',
+  city : '',
+  zipcode : '',
+  Country : 'United States',
+}
 function CustomerInformation() {
-  const [promoCode,SetPromoCode] = useState('');
-  const [finalAmount,SetfinalAmount] = useState(totalPrice);
-  const [alreadyapplied,SetalreadyApplied] = useState(false);
-  const toast = useToast()
-
-  const handlePromoCode = ()=>{
-    if(promoCode=='masai10' && alreadyapplied===false){
-      toast({
-        title: 'Promo Code Applied.',
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      })
-      let amountafterDiscount = (finalAmount)-((finalAmount*10)/100);
-      SetfinalAmount(amountafterDiscount)
-      SetalreadyApplied(true);
-      SetPromoCode("");
-    }else if(promoCode!=='masai10'){
-      toast({
-        title: 'Wrong Promo Code Applied Try Again.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-    }else{
-      toast({
-        title: 'You have already applied the Promo Code',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-      SetPromoCode("");
-    }
-  }
-const handlePromoInput = (e)=>{
-SetPromoCode(e.target.value);
+ const [Address,setAddress] = useState(userAddress);
+ 
+ let dispatch = useDispatch();
+ let navigate = useNavigate();
+ const handleFormdata = (e)=>{
+  let {name,value} = e.target;
+  setAddress({...Address,[name]:value})
+ }
+const handleShippingButton = ()=>{
+  dispatch(getAddress(Address));
+  setAddress('');
+  navigate('/shipping')
 }
 
   return (
@@ -177,6 +163,9 @@ SetPromoCode(e.target.value);
             borderColor="#12284c"
             size="lg"
             placeholder="Enter Your Email"
+            name ='email'
+            value ={Address.email}
+            onChange = {handleFormdata}
           />
           <br />
           <Checkbox colorScheme="blue" fontFamily="sans-serif" size="md">
@@ -235,6 +224,9 @@ SetPromoCode(e.target.value);
               fontFamily="sans-serif"
               _hover="none"
               borderColor="#12284c"
+              name='address'
+              value = {Address.address}
+              onChange = {handleFormdata}
             />
             <Input
               placeholder="Apartment, suite, etc.(optional)"
@@ -242,6 +234,9 @@ SetPromoCode(e.target.value);
               fontFamily="sans-serif"
               _hover="none"
               borderColor="#12284c"
+              name = 'apartment'
+              value = {Address.apartment}
+              onChange = {handleFormdata}
             />
           </Stack>
           <HStack mt="17px">
@@ -255,6 +250,9 @@ SetPromoCode(e.target.value);
               htmlSize={16}
               width="auto"
               mr="10px"
+              name = 'city'
+              value = {Address.city}
+              onChange = {handleFormdata}
             />
             <Select
               placeholder="State"
@@ -283,6 +281,9 @@ SetPromoCode(e.target.value);
               width="auto"
               mt="17px"
               mb="17px"
+              name = 'zipcode'
+              value = {Address.zipcode}
+              onChange={handleFormdata}
             />
           </HStack>
           <Checkbox>Save this information for next time</Checkbox>
@@ -295,46 +296,14 @@ SetPromoCode(e.target.value);
         </HStack>
         <Flex justifyContent="space-between" mt="40px">
           <Button  color='none' variant='link' outline='none'><ChevronLeftIcon/>RETURN TO CART</Button>
-          <Button bg='#12284c' colorScheme='white' pl='50px' pr='50px' pt='22px' pb='22px' rounded='none'>CONTINUE TO SHIPPING METHOD</Button>
+          <Button bg='#12284c' colorScheme='white' pl='50px' pr='50px' pt='22px' pb='22px' rounded='none'
+          onClick={handleShippingButton}>CONTINUE TO SHIPPING METHOD</Button>
         </Flex>
       </Box>
 
       <Box ml='20px'>
-        <HStack>/
-        <Input placeholder="Gift Card/Promo Code"
-        fontFamily="sans-serif"
-              _hover="none"
-              borderColor="#12284c"
-              size="lg"
-              htmlSize={16}
-              width="auto"
-              mt="17px"
-              mb="20px"
-              value={promoCode} onChange={handlePromoInput} />
-        <Button
-        bg='#12284c' colorScheme='white' pl='60px' pr='50px' pt='22px' pb='22px' rounded='3px'
-        onClick={handlePromoCode}>APPLY</Button>
-        </HStack>  
-        <hr />
-        <Flex justifyContent='space-between'
-         alignItems='center'
-        m='20px'>
-          <Text color='#666f81 '>Subtotal</Text>
-          <Text>${totalPrice}</Text>
-        </Flex>
-        <Flex justifyContent='space-between'
-        alignItems='center'
-        m='20px'>
-          <Text color='#666f81 '>Shipping</Text>
-          <Text fontSize='14px'>Calculated at next step</Text>
-        </Flex>
-        <hr />
-        <Flex justifyContent='space-between'
-        alignItems='center' m='20px'>
-          <Text color='#12284c '>Total</Text>
-          <Text><span>USD </span> ${finalAmount}</Text>
-        </Flex>
-      </Box>
+        <PromoCodeAndFinalAmount />
+        </Box>
     </Box>
   );
 }

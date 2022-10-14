@@ -25,6 +25,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getAddress } from "../../Redux/action";
+import { ImageLogo } from "./Image";
 import PromoCodeAndFinalAmount from "./PromoCodeAndFinalAmount";
 const userAddress = {
   email : '',
@@ -55,13 +56,7 @@ const handleShippingButton = ()=>{
         boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
         padding="60px"
       >
-        <Center>
-          <Image
-            width="248px"
-            mb="15px"
-            src="https://cdn.shopify.com/s/files/1/0283/0185/2747/files/blm-checkout-logo.png?118355"
-          ></Image>
-        </Center>
+       <ImageLogo/>
 
         <Breadcrumb
           spacing="3px"

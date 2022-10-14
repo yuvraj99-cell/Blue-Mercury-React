@@ -2,8 +2,9 @@ import { Box } from '@chakra-ui/react';
 import { Allroute } from './Allroute';
 import './App.css';
 import Cart from './pages/CartPage/Cart';
-import CustomerInformation from './pages/PaymentPage/CustomerInformation';
-import ShippingMethod from './pages/PaymentPage/ShippingMethod';
+import CustomerInformation from './pages/PaymentPages/CustomerInformation';
+import { PaymentPage } from './pages/PaymentPages/PaymentPage';
+import ShippingMethod from './pages/PaymentPages/ShippingMethod';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <CustomerInformation/>
       <ShippingMethod/> */}
       <Allroute/>
+      {/* <PaymentPage/> */}
     </Box>
   );
 }

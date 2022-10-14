@@ -178,7 +178,8 @@ fetchAndUpdate();
             height: "0.5px",
             width: "85%",
             margin: "auto",
-            marginTop: "10px",
+            marginTop: "19px",
+            marginBottom: '20px'
           }}
         />
         {/* This is for  Items Cart We need to edit  */}
@@ -198,7 +199,7 @@ fetchAndUpdate();
             height: "0.5px",
             width: "85%",
             margin: "auto",
-            marginTop: "10px",
+            marginTop: "20px",
           }}
         />
       </Box>
@@ -217,13 +218,14 @@ fetchAndUpdate();
       <hr
           style={{
             backgroundColor: "grey",
-            height: "0.5px",
+            height: "0.9px",
             width: "85%",
             margin: "auto",
-            marginTop: "10px",
+            marginTop: "20px",
+
           }}
         />
-        <Box ml={{ base: "50px", md: "100px", lg: "150px" }}>
+        <Box ml={{ base: "50px", md: "100px", lg: "150px" }} mt='20px'>
         <Grid  padding='15px' templateColumns='repeat(5, 1fr)' gap={6} >
        <GridItem   >
         <Flex >

@@ -1,4 +1,4 @@
-import { COUNT_CART, GET_ADDRESS, GET_ALREADYAPPLIED, GET_CART_DATA, GET_TOTALAMOUNT } from "./actionTypes"
+import { COUNT_CART, GET_ADDRESS, GET_ALREADYAPPLIED, GET_CART_DATA, GET_SHIPPINGCOST, GET_TOTALAMOUNT } from "./actionTypes"
 
 const initstate = {
     CartCount : 0,
@@ -6,6 +6,7 @@ const initstate = {
     address : '',
     totalAmount : 0,
     alreadyapplied : false,
+    shippingCost: 0
 }
 
 export const reducer = (state=initstate,action)=>{
@@ -31,6 +32,11 @@ switch(action.type){
     case GET_ALREADYAPPLIED : {
         return {
             ...state,alreadyapplied:action.payload
+        }
+    }
+    case GET_SHIPPINGCOST : {
+        return {
+            ...state,shippingCost:action.payload
         }
     }
     default :{

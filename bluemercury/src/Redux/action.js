@@ -1,4 +1,4 @@
-import { COUNT_CART, GET_ADDRESS, GET_ALREADYAPPLIED, GET_CART_DATA, GET_TOTALAMOUNT } from "./actionTypes"
+import { COUNT_CART, GET_ADDRESS, GET_ALREADYAPPLIED, GET_CART_DATA, GET_SHIPPINGCOST, GET_TOTALAMOUNT } from "./actionTypes"
 
 export const getcartCount = (data)=>{
 return {
@@ -27,6 +27,12 @@ export const gettotalAmount = (data)=>{
 export const getAlreadyApplied = (data)=>{
     return {
         type : GET_ALREADYAPPLIED,
+        payload : data
+    }
+}
+export const getShippingCost = (data) =>{
+    return {
+        type : GET_SHIPPINGCOST,
         payload : data
     }
 }

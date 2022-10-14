@@ -25,6 +25,7 @@ function PromoCodeAndFinalAmount({shippingCost}) {
       SetfinalPrice(shipCost+Number(totalAmount))
      }
    },[shipCost])
+
     const handlePromoCode = ()=>{
       if(promoCode=='masai10' && alreadyapplied===false){
         toast({
@@ -34,7 +35,6 @@ function PromoCodeAndFinalAmount({shippingCost}) {
           isClosable: true,
         })
        let amountafterDiscount=0;
-
         amountafterDiscount = (totalAmount)-((totalAmount*10)/100);
         dispatch(gettotalAmount(amountafterDiscount.toFixed(2)));
         dispatch(getAlreadyApplied(true));
@@ -71,10 +71,10 @@ function PromoCodeAndFinalAmount({shippingCost}) {
               width="auto"
               mt="17px"
               mb="20px"
-              value={promoCode} onChange={handlePromoInput} />
+              value={promoCode} disabled={alreadyapplied} onChange={handlePromoInput} />
         <Button
         bg='#12284c' colorScheme='white' pl='60px' pr='50px' pt='22px' pb='22px' rounded='3px'
-        onClick={handlePromoCode}>APPLY</Button>
+        onClick={handlePromoCode} disabled={alreadyapplied}>APPLY</Button>
         </HStack>  
         <hr />
         <Flex justifyContent='space-between'
@@ -93,7 +93,7 @@ function PromoCodeAndFinalAmount({shippingCost}) {
         <Flex justifyContent='space-between'
         alignItems='center' m='20px'>
           <Text color='#12284c '>Total</Text>
-          <Text><span>USD </span> {finalPrice==0 ? totalAmount:finalPrice}</Text>
+          <Text><span>USD </span> ${finalPrice==0 ? totalAmount:finalPrice}</Text>
         </Flex>
       </Box>
   )

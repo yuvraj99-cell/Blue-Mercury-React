@@ -1,28 +1,26 @@
-import { ChevronRightIcon } from '@chakra-ui/icons'
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Center, Flex, Image, Radio, RadioGroup, Text } from '@chakra-ui/react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Center, Flex, HStack, Image, Radio, RadioGroup, Text } from '@chakra-ui/react'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { getShippingCost } from '../../Redux/action'
+import { ImageLogo } from './Image'
 import PromoCodeAndFinalAmount from './PromoCodeAndFinalAmount'
 
 function ShippingMethod() {
     let {address} = useSelector(state=>state)
     const [value, setValue] = React.useState(7);
-    
-    // console.log(address);
-    /*
-    I need to Update the Address functionality after some time
-    */
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handlePayment = ()=>{
+      dispatch(getShippingCost(value))
+      navigate('/payment')
+    }
   return (
    <Box w="80%" m="auto" p="15px" display="flex" justifyContent='space-between' fontSize={{base:'base',sm:'sm',md:'md',lg:'lg'}}>
     <Box boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
-        padding="60px">
-              <Center>
-          <Image
-            width="248px"
-            mb="15px"
-            src="https://cdn.shopify.com/s/files/1/0283/0185/2747/files/blm-checkout-logo.png?118355"
-          ></Image>
-        </Center>
+        padding="60px" width='700px'>
+            <ImageLogo/>
         <Breadcrumb
           spacing="3px"
           separator={<ChevronRightIcon color="gray.500" mt="-4px" />}
@@ -115,6 +113,11 @@ function ShippingMethod() {
             </Flex>
           </Box>
         </Box>
+          <HStack justifyContent='space-between' alignItems='center' mt="40px">
+          <Button  color='none' variant='link' outline='none'fontWeight='light' fontSize='15px' lineHeight='3px'><ChevronLeftIcon/>RETURN TO INFORMATION</Button>
+          <Button bg='#12284c' colorScheme='white' pl='40px' pr='40px' pt='22px' pb='22px' rounded='none'
+         onClick={handlePayment} >CONTINUE TO PAYMENT</Button>
+          </HStack>
     </Box>
     
     <Box>

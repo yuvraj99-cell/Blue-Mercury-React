@@ -31,6 +31,7 @@ function PromoCodeAndFinalAmount({shippingCost}) {
         toast({
           title: 'Promo Code Applied.',
           status: 'success',
+          position: 'top',
           duration: 9000,
           isClosable: true,
         })
@@ -43,6 +44,7 @@ function PromoCodeAndFinalAmount({shippingCost}) {
         toast({
           title: 'Wrong Promo Code Applied Try Again.',
           status: 'error',
+          position: 'top',
           duration: 9000,
           isClosable: true,
         })
@@ -50,6 +52,7 @@ function PromoCodeAndFinalAmount({shippingCost}) {
         toast({
           title: 'You have already applied the Promo Code',
           status: 'error',
+          position: 'top',
           duration: 9000,
           isClosable: true,
         })

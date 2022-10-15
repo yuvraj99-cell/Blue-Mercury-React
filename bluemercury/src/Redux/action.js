@@ -36,3 +36,21 @@ export const getShippingCost = (data) =>{
         payload : data
     }
 }
+const setCartAmount = (res2,dispatch)=>{
+const amount = res2.reduce((acc,ele)=>{
+return acc+ (ele.ProductCard__Price*ele.quantity)
+},0)
+dispatch(gettotalAmount(amount));
+}
+export const fetchAndUpdate =()=>async(dispatch)=>{
+    try {
+     let res  = await fetch(`http://localhost:3005/Cart`);
+     let res2 = await res.json();
+     dispatch(fetchCartData(res2));
+     dispatch(getcartCount(res2.length));
+     setCartAmount(res2,dispatch);
+    } catch (error) {
+     console.log(error)
+    }
+    }
+

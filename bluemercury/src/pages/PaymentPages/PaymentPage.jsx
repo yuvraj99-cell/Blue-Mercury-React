@@ -1,8 +1,11 @@
-import { CheckIcon, ChevronLeftIcon, ChevronRightIcon, LockIcon, QuestionIcon } from '@chakra-ui/icons'
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Center, Flex, FormControl, HStack, Image, Input, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, PinInput, PinInputField, Text, Tooltip, useDisclosure, useToast, VStack } from '@chakra-ui/react'
+import {  ChevronLeftIcon, ChevronRightIcon, LockIcon, QuestionIcon } from '@chakra-ui/icons'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Flex, FormControl, HStack, Image, Input, InputGroup, InputRightElement, Text, Tooltip, useDisclosure, useToast, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { deleteAllItemAfterOrder } from './deleteAllItemAfterOrder'
 import { ImageLogo } from './Image'
+import { OtpModal } from './OtpModal'
 import PromoCodeAndFinalAmount from './PromoCodeAndFinalAmount'
 const initDetails = {
   cardNumber : "",
@@ -12,16 +15,38 @@ const initDetails = {
 }
 export const PaymentPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-    const {shippingCost,address} = useSelector(state=>state)
+
+    const {shippingCost,address,CartCount,Cart_Data} = useSelector(state=>state)
     const [details,setdetails] = useState(initDetails);
-    
+    const [otp,setOtp] = useState('');
+    const navigate = useNavigate();
     const toast = useToast()
+    const dispatch = useDispatch();
     const handleForm = (e)=>{
       let {name,value} = e.target;
       setdetails({...details,[name]:value});
     }
+    const handleOtp = ()=>{
+      if(otp==='1234'){
+      deleteAllItemAfterOrder(CartCount,Cart_Data,dispatch);
+        navigate('/')
+        toast({
+          title: 'Successfully Ordered',
+          position: 'top',
+          isClosable: true,
+          status : 'success',
+          duration : 9000
+        })
+      }else{
+        toast({
+          title: 'Wrong OTP Entered.',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+      }
+    }
   const handleOrder = ()=>{
-    console.log(details.cardNumber.length);
     if(details.cardNumber.length<16 || details.cardNumber.length>16 || details.securityCode.length<3 || details.securityCode.length>4){
       toast({
         title: 'Wrong Details Entered.',
@@ -132,33 +157,8 @@ export const PaymentPage = () => {
           <Button bg='#12284c' colorScheme='white' pl='40px' pr='40px' pt='22px' pb='22px' rounded='none'
           onClick={handleOrder} >COMPLETE ORDER</Button>
           </HStack>
-          <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>PLEASE ENTER OTP</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Center>
-          <PinInput   otp>
-           <PinInputField />
-           <PinInputField />
-           <PinInputField />
-           <PinInputField />
-         </PinInput>
-         </Center>
-          </ModalBody>
-
-          <ModalFooter>
-          <Button colorScheme='blue' mr={3} >
-              DONE
-            </Button>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
+         
+          <OtpModal isOpen={isOpen} onClose={onClose} onOpen={onOpen} otp={otp} setOtp={setOtp} handleOtp={handleOtp} />
         </Box>
 
         <Box>

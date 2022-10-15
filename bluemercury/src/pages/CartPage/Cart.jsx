@@ -17,7 +17,7 @@ import {
 import {  WarningIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCartData, getcartCount, gettotalAmount } from "../../Redux/action";
+import { fetchAndUpdate, fetchCartData, getcartCount, gettotalAmount } from "../../Redux/action";
 import { CartItem } from "./CartItem";
 import { Navigate, useNavigate } from "react-router-dom";
 function Cart() {
@@ -25,34 +25,32 @@ function Cart() {
  const {Cart_Data,CartCount,totalAmount} = useSelector(state=>state);
  let navigate = useNavigate();
 const dispatch = useDispatch();
-const setCartAmount = (res2)=>{
-const amount = res2.reduce((acc,ele)=>{
-return acc+ (ele.ProductCard__Price*ele.quantity)
-},0)
+// const setCartAmount = (res2)=>{
+// const amount = res2.reduce((acc,ele)=>{
+// return acc+ (ele.ProductCard__Price*ele.quantity)
+// },0)
 
-//console.log(amount + "line no. 31")
-dispatch(gettotalAmount(amount));
-}
- const fetchAndUpdate =async ()=>{
- try {
-  let res  = await fetch(`http://localhost:3005/Cart`);
-  let res2 = await res.json();
-  dispatch(fetchCartData(res2));
-  dispatch(getcartCount(res2.length));
-  setCartAmount(res2);
- } catch (error) {
-  console.log(error)
- }
- }
+// dispatch(gettotalAmount(amount));
+// }
+//  const fetchAndUpdate =async ()=>{
+//  try {
+//   let res  = await fetch(`http://localhost:3005/Cart`);
+//   let res2 = await res.json();
+//   dispatch(fetchCartData(res2));
+//   dispatch(getcartCount(res2.length));
+//   setCartAmount(res2);
+//  } catch (error) {
+//   console.log(error)
+//  }
+//  }
  useEffect(()=>{
-fetchAndUpdate();
+dispatch(fetchAndUpdate());
  },[])
  
  
  /*
 This is maintaining totalprice of our cart products
  */
- let totalprice = 0;
 
   /*
 This is maintaining totalprice of our cart products
@@ -61,7 +59,7 @@ This is maintaining totalprice of our cart products
 let res  = await fetch(`http://localhost:3005/Cart/${id}`,{
   method : 'DELETE',
 })
-fetchAndUpdate();
+dispatch(fetchAndUpdate());
  }
  const handlequantity =async (id,quantity)=>{
      await fetch(`http://localhost:3005/Cart/${id}`,{
@@ -71,7 +69,7 @@ fetchAndUpdate();
     'Content-Type': 'application/json'
   }
  })
- fetchAndUpdate();
+ dispatch(fetchAndUpdate());
  }
   return (
     <Box

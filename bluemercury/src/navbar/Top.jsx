@@ -17,21 +17,21 @@ export default function Top() {
     <div className='tn_div_1' style={{width:'100%'}}>
         <div className='tn_div_2' style={{width:'100%'}}>
         <Flex h="75px" justify="space-between" w='100%' bg="main.800">
-            <Button leftIcon={<FiMapPin />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400">
+            <Button leftIcon={<FiMapPin size='23px' />} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                 STORE & SPA LOCATOR
             </Button>
-            <Image h='50px' objectFit='cover'  my="20px" src='https://cdn.shopify.com/s/files/1/0283/0185/2747/files/bluemercury-logo_1216x.png?v=1648743182' alt='Logo' />
+            <Image h='38px' objectFit='cover' ml='14%' my="25px" src='https://cdn.shopify.com/s/files/1/0283/0185/2747/files/bluemercury-logo_1216x.png?v=1648743182' alt='Logo' />
             <Flex w="400px">
-                <Button leftIcon={<FaRegHeart />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400">
+                <Button leftIcon={<FaRegHeart size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                     WISHLIST
                 </Button>
-                <Button leftIcon={<FaSistrix />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400">
+                <Button leftIcon={<FaSistrix size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                     SEARCH
                 </Button>
-                <Button leftIcon={<VscAccount />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400">
+                <Button leftIcon={<VscAccount size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                     SIGN IN/UP
                 </Button>
-                <Button leftIcon={<BsBag />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400">
+                <Button leftIcon={<BsBag size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                     BAG
                 </Button>
             </Flex>
@@ -53,7 +53,7 @@ export default function Top() {
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader> <Button leftIcon={<VscAccount />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400">
+            <DrawerHeader> <Button leftIcon={<VscAccount size='20px'/>} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400">
                     SIGN IN/UP
                 </Button></DrawerHeader>
   
@@ -90,7 +90,7 @@ export default function Top() {
     </h2>
     <AccordionPanel pb={4}>
     <div style={{display:'flex',flexDirection:'column'}}>
-      <Button href="" p='0px' mb='2px' fontSize='12px' color='#838c9a' bg='white' h='fit-content'w='fit-content'>SHOP ALL</Button>
+      <Button href="" p='0px' _hover='none'  mb='2px' fontSize='12px' color='#838c9a' bg='white' h='fit-content'w='fit-content'>SHOP ALL</Button>
       <Button href="" p='0px' mb='2px' fontSize='12px' color='#838c9a' bg='white' h='fit-content'w='fit-content'>SKIN CARE</Button>
       <Button href="" p='0px' mb='2px' fontSize='12px' color='#838c9a' bg='white' h='fit-content'w='fit-content'>MAKE UP</Button> 
         </div>
@@ -218,10 +218,10 @@ export default function Top() {
         </Drawer>
         </div>
             <Flex w="fitContent" ml='5px'>
-                <Button leftIcon={<FaRegHeart />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400"></Button>
-                <Button leftIcon={<FaSistrix />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400"></Button>
-                <Button leftIcon={<VscAccount />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400"></Button>
-                <Button leftIcon={<BsBag />} color="#54647e" colorScheme='white' variant='solid' fontSize="14px" fontWeight="400"></Button>
+                <Button leftIcon={<FaRegHeart size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
+                <Button leftIcon={<FaSistrix size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
+                <Button leftIcon={<VscAccount size='20px'/>} color="#54647e" colorScheme='white' variant='solid' f fontWeight="400"></Button>
+                <Button leftIcon={<BsBag size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
             </Flex>
         </Flex>
         <div style={{height:'40px',display:'flex',justifyContent:'center'}}>

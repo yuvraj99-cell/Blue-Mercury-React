@@ -1,5 +1,4 @@
 import { Box } from '@chakra-ui/react';
-import { Allroute } from './Allroute';
 import './App.css';
 import Cart from './pages/CartPage/Cart';
 import CustomerInformation from './pages/PaymentPages/CustomerInformation';
@@ -13,7 +12,7 @@ function App() {
       {/* <Cart/>
       <CustomerInformation/>
       <ShippingMethod/> */}
-      <Allroute/>
+      
       {/* <PaymentPage/> */}
     </Box>
   );

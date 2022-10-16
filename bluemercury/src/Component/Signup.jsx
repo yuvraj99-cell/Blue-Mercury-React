@@ -1,5 +1,5 @@
 import { Box,Heading, Input, Select, Text } from "@chakra-ui/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { Alert, AlertIcon, AlertTitle, AlertDescription, Slide } from '@chakra-ui/react'
 
@@ -35,9 +35,12 @@ export const Signup = () => {
         setSuccess(true);
         setTimeout(()=>{
             setSuccess(false);
-            navigate('/');
+            navigate('/login');
         },4000)
     }
+    useEffect(() => {
+        (document.querySelector('title').innerText = 'Signup | bluemercury')
+    }, [])
     return <>
         <Slide in={alert} direction='left' position='fixed' top='0px' style={{ zIndex: 10 }}>
             <Alert status='error'  w='80vw' mx='10vw' mt='50px' flexWrap='wrap'>

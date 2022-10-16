@@ -36,7 +36,7 @@ export const Login = () => {
         },4000)
     }
     useEffect(() => {
-        (document.querySelector('title').innerText = 'Account - bluemercury')
+        (document.querySelector('title').innerText = 'Login | bluemercury')
     }, [])
     return <>
         <Slide in={alert} direction='left' position='fixed' top='0px' style={{ zIndex: 10 }}  bg='white'>

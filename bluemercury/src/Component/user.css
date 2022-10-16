@@ -1,0 +1,15 @@
+
+
+.active{
+    width: 90%;
+    padding: 8px 10px;
+    border: 1px solid #12284c;
+    background-color: #12284c;
+    color: white;
+}
+.inactive{
+    width: 80%;
+    padding: 8px 10px;
+    border: 1px solid black;
+    background-color: transparent;
+}

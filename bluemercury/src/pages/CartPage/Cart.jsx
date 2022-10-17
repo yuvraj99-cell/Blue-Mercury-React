@@ -69,7 +69,7 @@ dispatch(fetchAndUpdate());
     'Content-Type': 'application/json'
   }
  })
- dispatch(fetchAndUpdate());
+ dispatch(fetchAndUpdate()); 
  }
   return (
     <Box

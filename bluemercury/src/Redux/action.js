@@ -38,13 +38,13 @@ export const getShippingCost = (data) =>{
 }
 const setCartAmount = (res2,dispatch)=>{
 const amount = res2.reduce((acc,ele)=>{
-return acc+ (ele.ProductCard__Price*ele.quantity)
+return acc+ (Number(ele.ProductCard__Price)*ele.quntity)
 },0)
 dispatch(gettotalAmount(amount));
 }
 export const fetchAndUpdate =()=>async(dispatch)=>{
     try {
-     let res  = await fetch(`http://localhost:3005/Cart`);
+     let res  = await fetch(`https://blue-mercury.onrender.com/Cart`);
      let res2 = await res.json();
      dispatch(fetchCartData(res2));
      dispatch(getcartCount(res2.length));

@@ -153,7 +153,7 @@ export const PaymentPage = () => {
              </FormControl>
         </VStack>
         <HStack justifyContent='space-between' alignItems='center' mt="40px">
-          <Button  color='none' variant='link' outline='none'fontWeight='light' fontSize='15px' lineHeight='3px'><ChevronLeftIcon/>RETURN TO SHIPPING METHOD</Button>
+          <Button  color='none' variant='link' outline='none'fontWeight='light' fontSize='15px' lineHeight='3px' onClick={()=>navigate('/shipping')}><ChevronLeftIcon/>RETURN TO SHIPPING METHOD</Button>
           <Button bg='#12284c' colorScheme='white' pl='40px' pr='40px' pt='22px' pb='22px' rounded='none'
           onClick={handleOrder} >COMPLETE ORDER</Button>
           </HStack>

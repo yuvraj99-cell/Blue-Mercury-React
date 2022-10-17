@@ -19,7 +19,7 @@ export const CartItem = ({data,handlequantity,RemoveCartItem}) => {
             <Image
               w={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
               h={{ base: "40px", md: "45px", lg: "50px", "2xl": "60px" }}
-              src={data.ProductCard__Image}
+              src={data.ProductCard__Image_src}
             ></Image>
             <Text
               color="#64738a"
@@ -41,7 +41,7 @@ export const CartItem = ({data,handlequantity,RemoveCartItem}) => {
             fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
             ml='90px'
           >
-            ${data.ProductCard__Price}
+            ${Number(data.ProductCard__Price)}
           </Text>
         </Box>
         <Box>
@@ -51,9 +51,9 @@ export const CartItem = ({data,handlequantity,RemoveCartItem}) => {
             isAttached
             variant="outline"
           >
-           <IconButton disabled={data.quantity<=1}  aria-label="Reduce Products" icon={<MinusIcon />} onClick={()=>handlequantity(data.id,data.quantity-1)}/>
-            <Button >{data.quantity}</Button>
-            <IconButton aria-label="Add Products" icon={<AddIcon />} onClick={()=>handlequantity(data.id,data.quantity+1)}/>       
+           <IconButton disabled={data.quntity<=1}  aria-label="Reduce Products" icon={<MinusIcon />} onClick={()=>handlequantity(data.id,data.quntity-1)}/>
+            <Button >{data.quntity}</Button>
+            <IconButton aria-label="Add Products" icon={<AddIcon />} onClick={()=>handlequantity(data.id,data.quntity+1)}/>       
           </ButtonGroup>
           <br />
           <Button
@@ -64,7 +64,7 @@ export const CartItem = ({data,handlequantity,RemoveCartItem}) => {
             _hover="none"
             border="none"
             textDecoration="underline"
-            onClick={()=>RemoveCartItem(data.id)}
+            onClick={()=>RemoveCartItem(data.ID)}
           >
             REMOVE
           </Button>
@@ -73,7 +73,7 @@ export const CartItem = ({data,handlequantity,RemoveCartItem}) => {
           color="#64738a"
           fontSize={{ base: "10px", md: "12px", lg: "13px", "2xl": "15px" }}
         >
-          ${data.ProductCard__Price*data.quantity}
+          ${Number(data.ProductCard__Price)*data.quntity}
         </Box>
       </Box>
     

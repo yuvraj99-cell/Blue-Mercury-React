@@ -14,30 +14,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<<<<<<< HEAD
-    
-    <App />
-    
-=======
-
-  <BrowserRouter>
-  <ChakraProvider>
-  
-    <App />
-  
+<BrowserRouter>
+  <Provider store={store}>
+    <ChakraProvider>
+  <App></App>
   </ChakraProvider>
+  </Provider>
   </BrowserRouter>
 
-<ChakraProvider>
-    <BrowserRouter>
-    <Provider store={store}>
-    <App />
-    </Provider>
-    </BrowserRouter>
-    </ChakraProvider>
 
-
->>>>>>> main
 );
 
 

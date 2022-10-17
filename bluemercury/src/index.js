@@ -11,8 +11,14 @@ import { store } from './Redux/store';
 
 import { BrowserRouter } from 'react-router-dom';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+<<<<<<< HEAD
+    
+    <App />
+    
+=======
 
   <BrowserRouter>
   <ChakraProvider>
@@ -31,6 +37,7 @@ root.render(
     </ChakraProvider>
 
 
+>>>>>>> main
 );
 
 

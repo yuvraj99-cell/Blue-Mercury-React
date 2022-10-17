@@ -1,4 +1,14 @@
-<<<<<<< HEAD
+
+import { Route, Routes } from "react-router-dom";
+import Home from "./Component/Home";
+import { Login } from "./Component/Login";
+import { Signup } from "./Component/Signup";
+import UserAccount from "./Component/UserAccount";
+import AccountOverview from "./Component/userAccountComponent/AccountOverview";
+import MyBluerewards from "./Component/userAccountComponent/MyBluerewards";
+import MyPurchases from "./Component/userAccountComponent/MyPurchases"
+import MyWishlist from "./Component/userAccountComponent/MyWishlist"
+import AccountDetails from "./Component/userAccountComponent/AccountDetails"
 import './App.css';
 import Navbar from './navbar/Navbar';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -8,6 +18,10 @@ import BannerText from './banner_carousel/BannerText';
 // import Trending from './carousel/TrendingCarosel';
 import Footer from './footer/Footer';
 import Hover from './hover/Hover';
+
+import Products from "./Components/Product";
+import { Route, Routes } from "react-router-dom";
+import { SingleProducts } from "./Components/SingleProducts";
 // import NavOnScroll from './navbar/NavOnScroll'
 
 import {data_1} from './carousel/data';
@@ -21,9 +35,9 @@ import InfoCards from './info_cards/InfoCard';
 
 function App() {
   return (
-    <ChakraProvider>
+   <>
       <Navbar/>
-      {/* <NavOnScroll/> */}
+      
       <Hover/>
       <BannerText/>
       <Banner/>
@@ -53,23 +67,12 @@ function App() {
       <Carosel data_1={data_3} Title={"BEST SELLERS"}/>
       <InfoCards/>
       <Footer/>
-    </ChakraProvider>
-   
-=======
+    
+      </>
 
-import logo from "./logo.svg";
-import "./App.css";
-import Products from "./Components/Product";
-import { Route, Routes } from "react-router-dom";
-import { SingleProducts } from "./Components/SingleProducts";
+  )}
 
-function App() {
-  return (
-    <div className="App">
-     </div>
 
->>>>>>> main
-  );
-}
+
 
 export default App;

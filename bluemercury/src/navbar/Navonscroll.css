@@ -1,0 +1,7 @@
+.scrollnavActive{
+    display: block;
+    height: 40px;
+    position: absolute;
+    z-index: 20;
+    background-color: aqua;
+}

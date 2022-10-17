@@ -1,10 +1,31 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import './hover.css'
+import {Flex,Button} from '@chakra-ui/react';
+import {useState} from 'react';
+import { FaRegHeart, FaSistrix} from "react-icons/fa";
+import { FiMapPin } from "react-icons/fi";
+import { BsBag } from "react-icons/bs";
+import { VscAccount } from "react-icons/vsc";
 
 function Hover() {
+const [show,setShow]=useState(false);
+// window.addEventListener('scroll', showNav);
+const showNav = () => {
+    if (window.scrollY > 155) {
+        setShow(true);
+    }
+    else {
+        setShow(false);
+    } 
+
+}
+
   return (
+   
     <div className='MainMenu'>
+      {show && <div className='imag'style={{marginLeft:'50px'}}>
+        <img src="https://cdn.shopify.com/s/files/1/0283/0185/2747/files/bluemercury-logo_1216x.png?v=1648743182" alt=""  width='160px'/>
+      </div>}
       <ul>
         <li>SHOP
           <div className='SubMenu_1'>
@@ -531,8 +552,15 @@ function Hover() {
           </div>
         </li>
       </ul>
-
+      {show && <Flex w="fitContent" ml='5px'>
+                <Button leftIcon={<FiMapPin size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
+                <Button leftIcon={<FaRegHeart size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
+                <Button leftIcon={<FaSistrix size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
+                <Button leftIcon={<VscAccount size='20px'/>} color="#54647e" colorScheme='white' variant='solid' f fontWeight="400"></Button>
+                <Button leftIcon={<BsBag size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
+            </Flex>}
     </div>
+   
   )
 }
 

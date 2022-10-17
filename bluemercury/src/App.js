@@ -6,7 +6,8 @@ import Banner from './banner_carousel/Banner_Carousel';
 import BannerText from './banner_carousel/BannerText';
 // import Trending from './carousel/TrendingCarosel';
 import Footer from './footer/Footer';
-import Hover from './hover/Hover'
+import Hover from './hover/Hover';
+// import NavOnScroll from './navbar/NavOnScroll'
 
 import {data_1} from './carousel/data';
 import {data_2} from './carousel/dataScents';
@@ -21,6 +22,7 @@ function App() {
   return (
     <ChakraProvider>
       <Navbar/>
+      {/* <NavOnScroll/> */}
       <Hover/>
       <BannerText/>
       <Banner/>

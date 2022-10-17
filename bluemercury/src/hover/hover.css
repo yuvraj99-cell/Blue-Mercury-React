@@ -1,8 +1,18 @@
 .MainMenu{
-    height: 40px;
-    position: relative; 
+    height: 50px;
+    position: sticky; 
     z-index: 10;
+    top: 0;  
+    background-color: white; 
+    padding-top: 0.5%; 
+    display:flex;
+    justify-content:center;
+    justify-content:space-between;
+    align-items:center;
 }
+
+
+
 .MainMenu ul{
     color: #838c9a;
     list-style: none;
@@ -69,7 +79,7 @@ font-weight: 500;
     background-color:white;
     height: 500px;
     position: absolute;
-    top: 26px;
+    top: 42px;
     left: 0;
     padding: 2%  10%;
     

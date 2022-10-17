@@ -1,0 +1,100 @@
+
+.App {
+  text-align: center;
+  margin: 0px 0px;
+  padding: 0px 0px;
+ 
+  
+}
+.trending {
+  margin-top: 50px;
+/* height:700px; */
+background-color: #f9f3ec;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+justify-content: space-evenly;
+}
+.trending h2{
+  padding: 10px;
+  font-size: 30px;
+  font-weight: 400;
+  color:  #3d4d6a;
+}
+.trending h6{
+ padding: 10px;
+  color: #838c9a;
+}
+.trending_products{
+  display: flex;
+  justify-content: center;
+
+}
+.trending_products img{
+  width: 60%;
+  height:70%;
+  padding: 60px;
+}
+.ALO{
+  margin-top: 50px;
+  background-color:rgb(245, 239, 239) ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1%;
+
+}
+.ALO img{
+  height: 70%;
+  width: 40%;
+}
+.ALOO{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1%;
+  width: 40%;
+  
+}
+.ALOO h2{
+  color:#324564;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.ALOO h3{
+  color:#324564;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.ALOO p{
+  color:#838c9a;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.ALOO button{
+  font-size: 17px;
+  color: #324564;
+  font-weight: 500;
+  border-bottom: solid 2px #324564;
+}
+
+@media screen and (max-width:700px){
+  .ALO{
+    margin-top: 50px;
+    background-color:rgb(245, 239, 239) ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1%;
+  
+  }
+  
+}

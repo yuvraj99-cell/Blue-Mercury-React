@@ -290,7 +290,7 @@ const handleShippingButton = ()=>{
           </Text>
         </HStack>
         <Flex justifyContent="space-between" mt="40px">
-          <Button  color='none' variant='link' outline='none'><ChevronLeftIcon/>RETURN TO CART</Button>
+          <Button  color='none' variant='link' outline='none' onClick={()=>navigate('/Cart')}><ChevronLeftIcon/>RETURN TO CART</Button>
           <Button bg='#12284c' colorScheme='white' pl='50px' pr='50px' pt='22px' pb='22px' rounded='none'
           onClick={handleShippingButton}>CONTINUE TO SHIPPING METHOD</Button>
         </Flex>

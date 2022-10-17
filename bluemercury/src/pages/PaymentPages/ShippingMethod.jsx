@@ -114,7 +114,7 @@ function ShippingMethod() {
           </Box>
         </Box>
           <HStack justifyContent='space-between' alignItems='center' mt="40px">
-          <Button  color='none' variant='link' outline='none'fontWeight='light' fontSize='15px' lineHeight='3px'><ChevronLeftIcon/>RETURN TO INFORMATION</Button>
+          <Button  color='none' variant='link' outline='none'fontWeight='light' fontSize='15px' lineHeight='3px' onClick={()=>navigate('/contact')}><ChevronLeftIcon/>RETURN TO INFORMATION</Button>
           <Button bg='#12284c' colorScheme='white' pl='40px' pr='40px' pt='22px' pb='22px' rounded='none'
          onClick={handlePayment} >CONTINUE TO PAYMENT</Button>
           </HStack>

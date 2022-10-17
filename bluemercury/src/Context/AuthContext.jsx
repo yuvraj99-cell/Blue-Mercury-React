@@ -9,10 +9,11 @@ export const AuthContextProvider = ({children}) => {
       let token = JSON.parse(localStorage.getItem('bluemercury-token'));
       if(token){
         (async ()=> {
-            let res = await fetch(`http://localhost:3000/users?userToken=${token}`);
+            let res = await fetch(`https://blue-mercury.onrender.com/Users?userToken=${token}`);
             let data = await res.json();
             setIsAuth({...isAuth,data:data,loggedin:true});
         })()
+        console.log(isAuth)
       }  
     },[isAuth])
     return <AuthContext.Provider value={{isAuth,setIsAuth}}>

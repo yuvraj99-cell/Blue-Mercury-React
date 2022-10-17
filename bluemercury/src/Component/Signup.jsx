@@ -11,24 +11,22 @@ export const Signup = () => {
     const [alert, setAlert] = useState(false);
     const [success,setSuccess] = useState(false);
 
-    const Url="http://localhost:3000/users"
-    //this will change according to api
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        let usersRes = await fetch(Url);
+        let usersRes = await fetch(`https://blue-mercury.onrender.com/Users?email=${userData.email}`);
         let usersData = await usersRes.json();
-        let uniqData = usersData.filter(item => item.email === userData.email);
-        if (uniqData.length > 0) {
+        
+        if (usersData.length > 0) {
             setAlert(true);
             setTimeout(()=>{
                 setAlert(false)
             },4000)
             return;
         }
-        let res = await fetch(Url, {
+        let res = await fetch("https://blue-mercury.onrender.com/Users", {
             method: 'POST',
-            body: JSON.stringify({ ...userData, userToken: userData.fName + Date.now() + userData.lName, id: Date.now() }),
+            body: JSON.stringify({ ...userData, userToken: userData.fName + Date.now() + userData.lName}),
             headers: { "Content-Type": "application/json" }
         })
          await res.json();
@@ -45,7 +43,7 @@ export const Signup = () => {
         <Slide in={alert} direction='left' position='fixed' top='0px' style={{ zIndex: 10 }}>
             <Alert status='error'  w='80vw' mx='10vw' mt='50px' flexWrap='wrap'>
                 <AlertIcon />
-                <AlertTitle>User already exists!</AlertTitle>
+                <AlertTitle>This Email already used | User already exists!</AlertTitle>
                 <AlertDescription>Try logging in.</AlertDescription>
             </Alert>
         </Slide>

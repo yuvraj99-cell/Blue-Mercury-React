@@ -1,11 +1,14 @@
 import { Box, Button, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { fetchAndUpdate } from "../Redux/action";
 
 export const SingleProducts = () => {
   const [data, setData] = useState({});
   const { id } = useParams();
+  const dispatch= useDispatch()
   useEffect(() => {
     axios.get(`https://blure-mercury.herokuapp.com/Products/${id}`).then((res) => {
         console.log(res.data);
@@ -13,6 +16,18 @@ export const SingleProducts = () => {
 
     });
   },[id]);
+
+  const AddToCart= async () =>{
+ await fetch (`https://blure-mercury.herokuapp.com/Cart`,{
+
+ method:"POST",
+ body:JSON.stringify(data),
+ headers:{
+  'Content-Type': 'application/json'
+ }
+ } )
+dispatch(fetchAndUpdate())
+  }
   return (
     <Flex>
       <Flex  color="#F8F8F8"  >
@@ -37,7 +52,7 @@ export const SingleProducts = () => {
         </VStack>
 
         <Box mt="50px" bgColor="#F8F8F8"  h="150px" textAlign="center" >
-          <Button mt="10" bgColor="#12274B" w="600px"  mb="-8" color="white" >ADD TO BAG</Button>
+          <Button onClick={AddToCart} mt="10" bgColor="#12274B" w="600px"  mb="-8" color="white" >ADD TO BAG</Button>
           <Button mt="10" w="600px" bgColor="white" border="1px solid black" borderRadius={0} color="black" >SHIPPING & RETURNS</Button>
           
           </Box>

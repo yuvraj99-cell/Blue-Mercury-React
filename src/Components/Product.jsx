@@ -68,7 +68,7 @@ return  <Flex mt="20">
   
 
   <Box w="500px" ml="8" >
-    <Categories></Categories>
+    <Categories setData={setData}/>
     <Divider></Divider>
  <Filters></Filters>
    </Box>

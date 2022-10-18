@@ -28,7 +28,7 @@ export default function Top() {
                 STORE & SPA LOCATOR
             </Button>
             <Image  onClick={()=>{
-              navigate("/")
+              navigate("/Home")
             }} h='38px' objectFit='cover' ml='14%' my="25px" src='https://cdn.shopify.com/s/files/1/0283/0185/2747/files/bluemercury-logo_1216x.png?v=1648743182' alt='Logo' />
             <Flex w="400px">
                 <Button leftIcon={<FaRegHeart size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">

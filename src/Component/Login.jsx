@@ -1,4 +1,4 @@
-import { Box, Heading, Input, Text } from "@chakra-ui/react";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Heading, Input, Text } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -9,6 +9,7 @@ import {
   Slide,
 } from "@chakra-ui/react";
 import { AuthContext } from "../Context/AuthContext";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -25,7 +26,7 @@ export const Login = () => {
       );
       usersData = await usersData.json();
    
-      localStorage.setItem("bluemercury-user", usersData[0].userToken);
+      localStorage.setItem("bluemercury-token", usersData[0].userToken);
       setIsAuth({ ...isAuth, data: usersData[0], loggedin: true });
 
       setSuccess(true);
@@ -46,6 +47,19 @@ export const Login = () => {
   }, []);
   return (
     <>
+    <Box ml="10">
+    <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
+  <BreadcrumbItem>
+    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem>
+    <BreadcrumbLink href='/login'>LogIn</BreadcrumbLink>
+  </BreadcrumbItem>
+
+ 
+</Breadcrumb>
+</Box>
       <Slide
         in={alert}
         direction="left"

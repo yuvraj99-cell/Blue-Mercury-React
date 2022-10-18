@@ -6,7 +6,7 @@ export const AuthContextProvider = ({children}) => {
     const [isAuth,setIsAuth] = useState({data:{},loggedin:false});
 
     useEffect(()=>{
-      let token = JSON.parse(localStorage.getItem('bluemercury-token'));
+      let token = localStorage.getItem('bluemercury-token');
       if(token){
         (async ()=> {
             let res = await fetch(`https://blure-mercury.herokuapp.com/Users?userToken=${token}`);
@@ -15,7 +15,8 @@ export const AuthContextProvider = ({children}) => {
         })()
         console.log(isAuth)
       }  
-    },[isAuth])
+    },[isAuth.loggedin])
+    console.log(isAuth);
     return <AuthContext.Provider value={{isAuth,setIsAuth}}>
         {children}
     </AuthContext.Provider>

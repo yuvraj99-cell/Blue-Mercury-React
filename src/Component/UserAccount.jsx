@@ -10,7 +10,7 @@ const UserAccount = () => {
   const navigate = useNavigate();
   const LogoutUser = () => {
     setIsAuth({ ...isAuth, data: "", loggedin: false });
-    localStorage.removeItem("bluemercury-user");
+    localStorage.removeItem("bluemercury-token");
       setSuccess(true);
         setTimeout(()=>{
             setSuccess(false);
@@ -55,7 +55,7 @@ const UserAccount = () => {
            < FaRegUserCircle size="60px" /> 
             <Flex  ml="4" flexDirection="column">
               <Text   fontWeight="semibold" fontSize="18px">
-                {isAuth.data.fName} {isAuth.data.lName}
+                {isAuth.data[0].fName} {isAuth.data[0].lName}
               </Text>
               
                 <Text  cursor="pointer" onClick={LogoutUser} fontSize="14px" fontWeight="400">

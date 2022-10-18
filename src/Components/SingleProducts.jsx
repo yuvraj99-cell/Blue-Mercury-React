@@ -37,7 +37,7 @@ export const SingleProducts = () => {
         </VStack>
 
         <Box mt="50px" bgColor="#F8F8F8"  h="150px" textAlign="center" >
-          <Button mt="10" bgColor="#12274B" w="600px"  mb="-10" color="white" >ADD TO BAG</Button>
+          <Button mt="10" bgColor="#12274B" w="600px"  mb="-8" color="white" >ADD TO BAG</Button>
           <Button mt="10" w="600px" bgColor="white" border="1px solid black" borderRadius={0} color="black" >SHIPPING & RETURNS</Button>
           
           </Box>

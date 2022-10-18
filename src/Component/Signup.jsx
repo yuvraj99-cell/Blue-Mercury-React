@@ -1,7 +1,8 @@
-import { Box,Heading, Input, Select, Text } from "@chakra-ui/react"
+import { Box,Breadcrumb,BreadcrumbItem,BreadcrumbLink,Heading, Input, Select, Text } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { Alert, AlertIcon, AlertTitle, AlertDescription, Slide } from '@chakra-ui/react'
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export const Signup = () => {
     const [showBM, SetShowBM] = useState(false);
@@ -40,6 +41,21 @@ export const Signup = () => {
         (document.querySelector('title').innerText = 'Signup | bluemercury')
     }, [])
     return <>
+
+<Box ml="10">
+    <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
+  <BreadcrumbItem>
+    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem>
+    <BreadcrumbLink href='/signup'>SignUp</BreadcrumbLink>
+  </BreadcrumbItem>
+
+ 
+</Breadcrumb>
+</Box>
+
         <Slide in={alert} direction='left' position='fixed' top='0px' style={{ zIndex: 10 }}>
             <Alert status='error'  w='80vw' mx='10vw' mt='50px' flexWrap='wrap'>
                 <AlertIcon />

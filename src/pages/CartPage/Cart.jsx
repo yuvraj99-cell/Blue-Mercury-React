@@ -47,7 +47,9 @@ const dispatch = useDispatch();
 dispatch(fetchAndUpdate());
  },[])
  
- 
+ if(CartCount==0){
+  return navigate('/');
+ }
  /*
 This is maintaining totalprice of our cart products
  */
@@ -56,9 +58,11 @@ This is maintaining totalprice of our cart products
 This is maintaining totalprice of our cart products
  */
  const RemoveCartItem = async (id)=>{
+  
 let res  = await fetch(`https://blure-mercury.herokuapp.com/Cart/${id}`,{
   method : 'DELETE',
 })
+
 dispatch(fetchAndUpdate());
  }
  const handlequantity =async (id,quantity)=>{
@@ -317,4 +321,3 @@ dispatch(fetchAndUpdate());
 }
 
 export default Cart;
-

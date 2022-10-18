@@ -64,7 +64,7 @@ export const CartItem = ({data,handlequantity,RemoveCartItem}) => {
             _hover="none"
             border="none"
             textDecoration="underline"
-            onClick={()=>RemoveCartItem(data.ID)}
+            onClick={()=>RemoveCartItem(data.id)}
           >
             REMOVE
           </Button>

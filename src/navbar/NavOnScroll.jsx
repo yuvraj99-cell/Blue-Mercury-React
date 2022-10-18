@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from "react";
-import './Navonscroll.css';
+import Styles from "./Navonscroll.module.css"
 
 function NavOnScroll() {
     const [stick, setStick] = useState(false);
@@ -16,7 +16,7 @@ function NavOnScroll() {
     }
     return (
         <div>
-            <div className={stick?'scrollnavActive':'scrollnav'}> </div>
+            <div className={stick? Styles.scrollnavActive:'scrollnav'}> </div> 
         </div>
         
     )

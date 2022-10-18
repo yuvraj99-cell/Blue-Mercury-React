@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import styles from './user.module.css';
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
-
+import {FaRegUserCircle} from "react-icons/fa"
 const UserAccount = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
   const [success , setSuccess]=useState(false);
@@ -51,16 +51,16 @@ const UserAccount = () => {
           MY ACCOUNT
         </Heading>
         <Flex alignItems="flex-start">
-          <Flex flexDirection="row">
-            <Box mr={10} w="50px" h="45px" bgColor="gray.600"></Box>
-            <Flex flexDirection="column">
-              <Text  fontWeight="semibold" fontSize="18px">
+          <Flex justifyContent="space-between" flexDirection="row">
+           < FaRegUserCircle size="60px" /> 
+            <Flex  flexDirection="column">
+              <Text   fontWeight="semibold" fontSize="18px">
                 {isAuth.data.fName} {isAuth.data.lName}
               </Text>
               
-                <Text cursor="pointer" onClick={LogoutUser} fontSize="14px" fontWeight="400">
+                <Text  cursor="pointer" onClick={LogoutUser} fontSize="14px" fontWeight="400">
                   Logout
-                </Text>
+                </Text >
             </Flex>
           </Flex>
 

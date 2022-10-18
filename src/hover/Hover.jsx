@@ -6,9 +6,11 @@ import { FaRegHeart, FaSistrix} from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
+import { useNavigate } from 'react-router-dom';
 
 function Hover() {
 const [show,setShow]=useState(false);
+const navigate=useNavigate()
 // window.addEventListener('scroll', showNav);
 const showNav = () => {
     if (window.scrollY > 155) {
@@ -36,7 +38,9 @@ const showNav = () => {
                 gap: '20px', height: '100%', width: '100%', marginTop: '0px'
               }}>
 
-                <li>Skincare
+                <li onClick={()=>{
+                navigate("/Products")
+                }} >Skincare
                   <div className='submenu_3'>
                   <div>
                 <h3>BY CATEGORY</h3>

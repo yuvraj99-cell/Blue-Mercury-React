@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Flex, Image, Button,  Drawer,DrawerBody,DrawerFooter,DrawerHeader,
     DrawerOverlay,DrawerContent,DrawerCloseButton,useDisclosure, Accordion,
     AccordionItem,AccordionButton,AccordionPanel,AccordionIcon,Box } from '@chakra-ui/react';
@@ -8,10 +8,17 @@ import { BsBag } from "react-icons/bs";
 import { MdMenu } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
 import './top.css';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
+
 
 export default function Top() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
+    const {isAuth,setIsAuth}= useContext(AuthContext);
+
+
+   const navigate=useNavigate()
 
     return (
     <div className='tn_div_1' style={{width:'100%'}}>
@@ -28,8 +35,11 @@ export default function Top() {
                 <Button leftIcon={<FaSistrix size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                     SEARCH
                 </Button>
-                <Button leftIcon={<VscAccount size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
-                    SIGN IN/UP
+                <Button  onClick={()=>{
+                  isAuth.loggedin?navigate("/user_account/account_overview"):navigate("/login")
+
+                }} leftIcon={<VscAccount size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
+                   {isAuth.loggedin?"ACCOUNT":" SIGN IN/UP "}
                 </Button>
                 <Button leftIcon={<BsBag size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                     BAG

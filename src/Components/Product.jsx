@@ -34,11 +34,14 @@ const [SearchParams, setSearchParam] = useSearchParams();
 const [Page, setPage] = useState(getCurrentPage(SearchParams.get('Page'))||1);
 const [totalPages, setTotalPages] = useState();
 const [Orderby, setOrderby] = useState(SearchParams.get("Orderby")||"");
+useEffect(() => {
+  document.querySelector("title").innerText = "Skin Care| bluemercury";
+}, []);
 const navigate=useNavigate()
 const p1=`&_sort=ProductCard__Price&_order=${Orderby}`
 React.useEffect(()=>{
 
-axios.get(`http://localhost:8000/Products?_page=${Page}&_limit=12${Orderby && p1}` )
+axios.get(`https:/blue-mercury.onrender.com/Products?_page=${Page}&_limit=80${Orderby && p1}` )
 
 .then((res) =>{
     console.log(res);
@@ -71,7 +74,7 @@ return  <Flex mt="20">
    </Box>
 
 
-  <Box flexGrow="1" ml="10" mr="10">
+  <Box flexGrow="1" ml="10" mr="10" mb="10">
 
   
    
@@ -92,16 +95,16 @@ return  <Flex mt="20">
 </Flex>
  <Divider mt="7" borderColor="gary.200" ></Divider>
  <NicheKa></NicheKa>
-<Grid templateColumns={{base:'repeat(1, 1fr)',sm:'repeat(2, 1fr)',lg:'repeat(3, 1fr)',xl:'repeat(4, 1fr)'}} gap={0} mt="24" >
+<Grid templateColumns={{base:'repeat(1, 1fr)',sm:'repeat(2, 1fr)',lg:'repeat(3, 1fr)',xl:'repeat(4, 1fr)'}} gap={0} mt="24"  mr="10" >
     
-    {data.map(el=><GridItem onClick={()=>navigate(`/Products/${el.id}`)} key={el.Price} position="relative"  border="none" w="270px" mb="14" > <Text ml="-32" fontSize='sm' fontWeight="300" >{el.MerchBadge } </Text> <IconButton bg={0} icon={<TbHeartPlus fontSize={"25px"}/>} top={0} right="1" position="absolute"  ></IconButton><Image src={el.ProductCard__Image_src}  > 
+    {data.map(el=><GridItem mb="-4" onClick={()=>navigate(`/Products/${el.id}`)} key={el.Price} position="relative"   border="none" w="270px" > <Text ml="4" fontSize='sm' fontWeight="300" >{el.MerchBadge } </Text> <IconButton bg={0} icon={<TbHeartPlus fontSize={"25px"}/>} top={0} right="1" position="absolute"  ></IconButton><Image m="auto"  h="65%" src={el.ProductCard__Image_src}  > 
   
     </Image>
 
 
-    <Button  id={el.id}  borderRadius="none" border='transparent' bg='white' color="transparent"  _hover={{border:"1px solid black", color:"black"}} >Quick View</Button><Text>
+    <Button  id={el.id}  borderRadius="none" border='transparent' bg='white'  ml="2"  w="90%" color="transparent"  _hover={{border:"1px solid black", color:"black"}} >Quick View</Button><Text textAlign="center" >
       {el.ProductCard__Title}  </Text>
-      <Text>${el.ProductCard__Price}</Text>
+      <Text textAlign="center" fontWeight="550" >${el.ProductCard__Price}</Text>
      
 
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
@@ -133,9 +136,10 @@ return  <Flex mt="20">
          }
      
 </Grid>
+<Flex justify="center" mt="70px">
+{arr.map((el) => ( 
+                    <Button mr="2" 
 
-{arr.map((el) => (
-                    <Button mr="2"
                       colorScheme={"blue"} variant="outline"
                       onClick={() => setPage(el)}
                       disabled={Page === el}
@@ -144,7 +148,9 @@ return  <Flex mt="20">
                       {el}
                     </Button>
                   ))}
+                  </Flex>
 </Box>
+
 </Flex>
 }
 export default Products; 

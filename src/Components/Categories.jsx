@@ -29,7 +29,7 @@ export const Categories = () => {
 
     <Box  mt="12">
     <Text align="left"  ml="3"   fontFamily="Montserrat Regular" sans-serif > SKIN CARE CATEGORY</Text>
-    <Text  align="left"  mt="7" ml="-14" fontSize='xs' as='i'   fontFamily="Montserrat Regular" sans-serif >Select One to narrow results</Text>
+    <Text  align="left"  mt="7" ml="1" fontSize='xs' as='i'   fontFamily="Montserrat Regular" sans-serif >Select One to narrow results</Text>
 <Divider mt="4" mb="6" borderColor="gary.200" ></Divider>
 
 <Text fontSize='sm' fontWeight={200} align="left" mt="7" ml="4" >Cleansers</Text>
@@ -47,7 +47,7 @@ export const Categories = () => {
 
 
 
-    <Box m="5" ml="-8"fontWeight={400} fontSize='sm' >FILTERS BY SKIN CARE   </Box>
+    <Box m="5" ml="-2"fontWeight={400} fontSize='sm' >FILTERS BY SKIN CARE   </Box>
 
     </Box>
   )

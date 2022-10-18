@@ -4,7 +4,7 @@ import { Accordion,
     AccordionButton,
     AccordionPanel,
     AccordionIcon, Box} from '@chakra-ui/react';
-import './footer.css';
+import  './footer.css';
 import {FaTwitter,FaPinterestP,FaFacebookF,FaInstagram,FaYoutube,FaLongArrowAltRight} from 'react-icons/fa'
 
 const Footer = () => {

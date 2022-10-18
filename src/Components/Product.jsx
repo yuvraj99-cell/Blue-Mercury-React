@@ -41,7 +41,7 @@ const navigate=useNavigate()
 const p1=`&_sort=ProductCard__Price&_order=${Orderby}`
 React.useEffect(()=>{
 
-axios.get(`https:/blue-mercury.onrender.com/Products?_page=${Page}&_limit=80${Orderby && p1}` )
+axios.get(`https://blure-mercury.herokuapp.com/Products?_page=${Page}&_limit=12${Orderby && p1}` )
 
 .then((res) =>{
     console.log(res);

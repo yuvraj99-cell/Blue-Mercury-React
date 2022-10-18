@@ -53,7 +53,7 @@ const UserAccount = () => {
         <Flex alignItems="flex-start">
           <Flex justifyContent="space-between" flexDirection="row">
            < FaRegUserCircle size="60px" /> 
-            <Flex  flexDirection="column">
+            <Flex  ml="4" flexDirection="column">
               <Text   fontWeight="semibold" fontSize="18px">
                 {isAuth.data.fName} {isAuth.data.lName}
               </Text>

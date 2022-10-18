@@ -44,7 +44,7 @@ dispatch(gettotalAmount(amount));
 }
 export const fetchAndUpdate =()=>async(dispatch)=>{
     try {
-     let res  = await fetch(`https://blue-mercury.onrender.com/Cart`);
+     let res  = await fetch(`https://blure-mercury.herokuapp.com/Cart`);
      let res2 = await res.json();
      dispatch(fetchCartData(res2));
      dispatch(getcartCount(res2.length));

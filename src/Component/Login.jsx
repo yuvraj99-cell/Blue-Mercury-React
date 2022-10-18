@@ -21,7 +21,7 @@ export const Login = () => {
     e.preventDefault();
     try {
       let usersData = await fetch(
-        `https://blue-mercury.onrender.com/Users?email=${userData.email}&password=${userData.password}`
+        `https://blure-mercury.herokuapp.com/Users?email=${userData.email}&password=${userData.password}`
       );
       usersData = await usersData.json();
    

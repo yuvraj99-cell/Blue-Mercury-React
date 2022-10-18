@@ -7,7 +7,7 @@ export const SingleProducts = () => {
   const [data, setData] = useState({});
   const { id } = useParams();
   useEffect(() => {
-    axios.get(`https:/blue-mercury.onrender.com/Products/${id}`).then((res) => {
+    axios.get(`https://blure-mercury.herokuapp.com/Products/${id}`).then((res) => {
         console.log(res.data);
       setData(res.data);
 

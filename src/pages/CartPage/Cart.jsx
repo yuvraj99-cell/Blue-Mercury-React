@@ -56,13 +56,13 @@ This is maintaining totalprice of our cart products
 This is maintaining totalprice of our cart products
  */
  const RemoveCartItem = async (id)=>{
-let res  = await fetch(`https://blue-mercury.onrender.com/Cart/${id}`,{
+let res  = await fetch(`https://blure-mercury.herokuapp.com/Cart/${id}`,{
   method : 'DELETE',
 })
 dispatch(fetchAndUpdate());
  }
  const handlequantity =async (id,quantity)=>{
-     await fetch(`https://blue-mercury.onrender.com/Cart/${id}`,{
+     await fetch(`https://blure-mercury.herokuapp.com/Cart/${id}`,{
   method : 'PATCH',
   body : JSON.stringify({quntity:quantity}),
   headers : {

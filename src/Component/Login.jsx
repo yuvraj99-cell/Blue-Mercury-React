@@ -17,20 +17,23 @@ export const Login = () => {
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
   const { isAuth, setIsAuth } = useContext(AuthContext);
-
+ 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+     
       let usersData = await fetch(
         `https://blure-mercury.herokuapp.com/Users?email=${userData.email}&password=${userData.password}`
       );
       usersData = await usersData.json();
-   
+      
       localStorage.setItem("bluemercury-token", usersData[0].userToken);
       setIsAuth({ ...isAuth, data: usersData[0], loggedin: true });
 
       setSuccess(true);
+     
       setTimeout(() => {
+        
         setSuccess(false);
         navigate("/");
       }, 3000);
@@ -154,6 +157,7 @@ export const Login = () => {
             type="submit"
             value="LOGIN"
             bg="#12284c"
+            
             color="white"
             borderRadius="0px"
             mt="15px"

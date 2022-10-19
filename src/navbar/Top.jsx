@@ -10,14 +10,15 @@ import { VscAccount } from "react-icons/vsc";
 import './top.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
-
+import {useSelector} from 'react-redux'
+import { CartDrawer } from './CartDrawer';
+import { Privateroutes } from '../Components/PrivateRoute';
 
 export default function Top() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const {isAuth,setIsAuth}= useContext(AuthContext);
-
-
+   const {CartCount} = useSelector(state=>state)
    const navigate=useNavigate()
 
     return (
@@ -28,7 +29,7 @@ export default function Top() {
                 STORE & SPA LOCATOR
             </Button>
             <Image  onClick={()=>{
-              navigate("/Home")
+              navigate("/")
             }} h='38px' objectFit='cover' ml='14%' my="25px" src='https://cdn.shopify.com/s/files/1/0283/0185/2747/files/bluemercury-logo_1216x.png?v=1648743182' alt='Logo' />
             <Flex w="400px">
                 <Button leftIcon={<FaRegHeart size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
@@ -43,9 +44,25 @@ export default function Top() {
                 }} leftIcon={<VscAccount size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
                    {isAuth.loggedin?"ACCOUNT":" SIGN IN/UP "}
                 </Button>
-                <Button leftIcon={<BsBag size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
+                {/* <Button onClick={onOpen} position='relative' leftIcon={<BsBag size='23px'/>} color="#12284C" colorScheme='white' variant='solid' fontSize="11px" fontWeight="500">
+                   <div style={{
+                    position : 'absolute',
+                    top : '16px',
+                    left : '15px',
+                    backgroundColor :  `${CartCount>0?'red':'white'}`,
+                    color : 'white',
+                    width : '18px',
+                    borderRadius : '2px',
+                    height : '14px'
+                   }}>
+                  {CartCount}
+                   </div>
                     BAG
-                </Button>
+                </Button> */}
+                      
+                        <CartDrawer name='BAG'/>
+                     
+
             </Flex>
         </Flex>
         </div>
@@ -233,7 +250,8 @@ export default function Top() {
                 <Button leftIcon={<FaRegHeart size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
                 <Button leftIcon={<FaSistrix size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
                 <Button leftIcon={<VscAccount size='20px'/>} color="#54647e" colorScheme='white' variant='solid' f fontWeight="400"></Button>
-                <Button leftIcon={<BsBag size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button>
+                {/* <Button leftIcon={<BsBag size='20px'/>} color="#54647e" colorScheme='white' variant='solid'  fontWeight="400"></Button> */}
+                <CartDrawer name=''/>
             </Flex>
         </Flex>
         <div style={{height:'40px',display:'flex',justifyContent:'center'}}>

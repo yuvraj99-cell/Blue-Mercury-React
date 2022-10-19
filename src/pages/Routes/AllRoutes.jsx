@@ -15,6 +15,7 @@ import  Cart  from "../CartPage/Cart";
 import  CustomerInformation  from "../PaymentPages/CustomerInformation";
 import  ShippingMethod from "../PaymentPages/ShippingMethod";
 import { PaymentPage}  from "../PaymentPages/PaymentPage";
+import { Privateroutes } from "../../Components/PrivateRoute";
 
 
 
@@ -34,10 +35,10 @@ export const AllRoutes = () => {
       </Route>
       <Route path="/Products" element={<Products />} />
       <Route path="/Products/:id" element={<SingleProducts />} />
-      <Route path="/Cart" element={<Cart />} />
-      <Route path="/contact" element={<CustomerInformation />} />
-      <Route path="/shipping" element={<ShippingMethod />} />
-      <Route path="/payment" element={<PaymentPage />} />
+      <Route path="/Cart" element={<Privateroutes><Cart /></Privateroutes>} />
+      <Route path="/contact" element={<Privateroutes><CustomerInformation /></Privateroutes>} />
+      <Route path="/shipping" element={<Privateroutes><ShippingMethod /></Privateroutes>} />
+      <Route path="/payment" element={<Privateroutes><PaymentPage /></Privateroutes>} />
     </Routes>
   );
 };

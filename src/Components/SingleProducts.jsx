@@ -1,14 +1,18 @@
-import { Box, Button, Flex, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text, useToast, VStack } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 import { fetchAndUpdate } from "../Redux/action";
 
 export const SingleProducts = () => {
   const [data, setData] = useState({});
   const { id } = useParams();
+  const {isAuth} = useContext(AuthContext);
   const dispatch= useDispatch()
+  const toast = useToast()
+  const navigate = useNavigate()
   useEffect(() => {
     axios.get(`https://blure-mercury.herokuapp.com/Products/${id}`).then((res) => {
         console.log(res.data);
@@ -18,15 +22,26 @@ export const SingleProducts = () => {
   },[id]);
 
   const AddToCart= async () =>{
- await fetch (`https://blure-mercury.herokuapp.com/Cart`,{
+if(!isAuth.loggedin){
+ return navigate('/login')
+}else{
+  await fetch (`https://blure-mercury.herokuapp.com/Cart`,{
+    method:"POST",
+    body: JSON.stringify(data),
+    headers:{
+    'Content-Type': 'application/json'
+   }
+   } )
+    dispatch(fetchAndUpdate())
+    toast({
+      title: 'Product Added To Cart.',
+      status: 'success',
+      position: 'top',
+      duration: 9000,
+      isClosable: true,
+    })
+}
 
- method:"POST",
- body:JSON.stringify(data),
- headers:{
-  'Content-Type': 'application/json'
- }
- } )
-dispatch(fetchAndUpdate())
   }
   return (
     <Flex>

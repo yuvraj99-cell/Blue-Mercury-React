@@ -55,5 +55,6 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "keywords": []
+  "keywords": [],
+   "homepage": "."
 }

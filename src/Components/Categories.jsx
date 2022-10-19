@@ -3,11 +3,26 @@ import { Box , Breadcrumb, BreadcrumbItem, BreadcrumbLink, Text } from '@chakra-
 import { Divider } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import axios from 'axios'
+//https://blure-mercury.herokuapp.com/Product?MerchBadge=${cat}
+export const Categories = ({setData,setloading}) => {
 
-export const Categories = ({setData}) => {
-  const changeFilter=(cat)=> axios.get(`https://blure-mercury.herokuapp.com/Product?MerchBadge=${cat}`).then((res) => {
-  setData(res.data)
-  });
+  const changeFilter= async (cat)=>{
+    
+      setloading(true);
+      let res = await fetch(`https://blure-mercury.herokuapp.com/Products?MerchBadge=${cat}`)
+      let data = await res.json();
+      setData(data);
+      setloading(false);
+
+   
+      setloading(true);
+      let res2 = await fetch(`https://blure-mercury.herokuapp.com/Products?MerchBadge_2=${cat}`)
+      let data2 = await res2.json();
+      setData([...data,...data2]);
+      setloading(false);
+ 
+   
+  }
   return (
     <Box>
     
@@ -34,10 +49,10 @@ export const Categories = ({setData}) => {
     <Text  align="left"  mt="7" ml="1" fontSize='xs' as='i'   fontFamily="Montserrat Regular" sans-serif >Select One to narrow results</Text>
 <Divider mt="4" mb="6" borderColor="gary.200" ></Divider>
 
-<Text onClick={()=>{changeFilter("Best Seller")}} fontSize='sm' fontWeight={200} align="left" mt="7" ml="4" >Cleansers</Text>
-<Text onClick={()=>{changeFilter("Conscious Beauty")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Exfoliators & Peels</Text>
-<Text onClick={()=>{changeFilter("Limited Edition")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Eye Care</Text>
-<Text onClick={()=>{changeFilter("Limited Edition")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Gifts</Text>
+<Text onClick={()=>{changeFilter("Best Seller")}} fontSize='sm' fontWeight={200} align="left" mt="7" ml="4" >Best Sellers</Text>
+<Text onClick={()=>{changeFilter("Conscious Beauty")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Conscious Beauty</Text>
+<Text onClick={()=>{changeFilter("Limited Edition")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Limited Edition</Text>
+<Text onClick={()=>{changeFilter("Exclusive")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Exclusive</Text>
 <Text onClick={()=>{changeFilter("Limited Edition")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >lips</Text>
 <Text onClick={()=>{changeFilter("Limited Edition")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Mask</Text>
 <Text onClick={()=>{changeFilter("Limited Edition")}} fontSize='sm' fontWeight={200} align="left" mt="1.5" ml="4" >Moisturizers</Text>

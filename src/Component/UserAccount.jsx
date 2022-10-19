@@ -12,11 +12,12 @@ const UserAccount = () => {
     setIsAuth({ ...isAuth, data: "", loggedin: false });
     localStorage.removeItem("bluemercury-token");
       setSuccess(true);
-        setTimeout(()=>{
-            setSuccess(false);
-            navigate("/")
-          },1500)
-
+        // setTimeout(()=>{
+        //     setSuccess(false);
+        //     navigate('/login')
+        //   },1500)
+        setSuccess(false);
+       return navigate('/');
   };
   console.log(isAuth);
   useEffect(() => {

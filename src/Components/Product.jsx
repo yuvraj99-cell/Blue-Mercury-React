@@ -33,20 +33,23 @@ const [display ,setDisplay] = React.useState(false);
 const [SearchParams, setSearchParam] = useSearchParams();
 const [Page, setPage] = useState(getCurrentPage(SearchParams.get('Page'))||1);
 const [totalPages, setTotalPages] = useState();
+const [loading,setloading] = useState(false);
 const [Orderby, setOrderby] = useState(SearchParams.get("Orderby")||"");
+
 useEffect(() => {
   document.querySelector("title").innerText = "Skin Care| bluemercury";
 }, []);
 const navigate=useNavigate()
 const p1=`&_sort=ProductCard__Price&_order=${Orderby}`
 React.useEffect(()=>{
-
+  setloading(true);
 axios.get(`https://blure-mercury.herokuapp.com/Products?_page=${Page}&_limit=12${Orderby && p1}` )
 
 .then((res) =>{
     console.log(res);
     setData(res.data);
     setTotalPages(Math.ceil(res.headers["x-total-count"] / 12))
+    setloading(false);
 });
 }, [Page,Orderby])
 
@@ -58,6 +61,7 @@ useEffect(()=>{
   setSearchParam(ParamObj)
 },[Page,Orderby])
 
+
 const arr=[];
 
 for (let i = 0; i < totalPages; i++) arr[i] = i + 1;
@@ -68,7 +72,7 @@ return  <Flex mt="20">
   
 
   <Box w="500px" ml="8" >
-    <Categories setData={setData}/>
+    <Categories setData={setData} setloading={setloading}/>
     <Divider></Divider>
  <Filters></Filters>
    </Box>
@@ -89,13 +93,12 @@ return  <Flex mt="20">
   <Box><Select onChange={(e)=> setOrderby(e.target.value)} value={Orderby} borderRadius="none"  w="56" placeholder='Select option'>
    <option value='asc'>Price low to high</option>
    <option value='desc'>Price high to low </option>
-   <option value='option3'>Option 3</option>
  </Select></Box>
 
 </Flex>
  <Divider mt="7" borderColor="gary.200" ></Divider>
  <NicheKa></NicheKa>
-<Grid templateColumns={{base:'repeat(1, 1fr)',sm:'repeat(2, 1fr)',lg:'repeat(3, 1fr)',xl:'repeat(4, 1fr)'}} gap={0} mt="24"  mr="10" >
+{loading ? <Image display='block' margin='auto' mt='100px' src='https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'></Image> :<Grid templateColumns={{base:'repeat(1, 1fr)',sm:'repeat(2, 1fr)',lg:'repeat(3, 1fr)',xl:'repeat(4, 1fr)'}} gap={0} mt="24"  mr="10" >
     
     {data.map(el=><GridItem mb="-4" onClick={()=>navigate(`/Products/${el.id}`)} key={el.Price} position="relative"   border="none" w="270px" > <Text ml="4" fontSize='sm' fontWeight="300" >{el.MerchBadge } </Text> <IconButton bg={0} icon={<TbHeartPlus fontSize={"25px"}/>} top={0} right="1" position="absolute"  ></IconButton><Image m="auto"  h="65%" src={el.ProductCard__Image_src}  > 
   
@@ -136,7 +139,8 @@ return  <Flex mt="20">
          }
      
 </Grid>
-<Flex justify="center" mt="70px">
+}
+{ loading?"": <Flex justify="center" mt="70px">
 {arr.map((el) => ( 
                     <Button mr="2" 
 
@@ -149,6 +153,7 @@ return  <Flex mt="20">
                     </Button>
                   ))}
                   </Flex>
+}
 </Box>
 
 </Flex>

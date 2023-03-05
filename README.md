@@ -1,4 +1,4 @@
-Netlify Deployed Link - [**Blue Mercury(Clone)**](https://blue-mercuryclone2.netlify.app/)
+Netlify Deployed Link - [**Blue Mercury(Clone)**](https://profound-mochi-af6c79.netlify.app/)
 
 GitHub Link - [GitHub](https://github.com/yuvraj99-cell/Blue-Mercury-React)
 

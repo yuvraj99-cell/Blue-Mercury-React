@@ -11,6 +11,11 @@ Our Problem statement is to build a pixel-perfect clone of the Blue Mercury Webs
 
 Since I'm pursuing a Full Stack Web Development course at Masai School I was given a project to clone a Blue Mercury website. I was given a team of four members including me and the task was to clone the pixel-perfect clone of the website. Let's look at how we designed it 👇
 
+
+## DEMO---
+
+https://user-images.githubusercontent.com/84410406/223242424-5dfdbb9d-c477-408f-ab68-d848815ce676.mp4
+
 ## Home-Page -
 ![Screenshot (236)](https://user-images.githubusercontent.com/108890778/201250253-68b7fe2e-2624-4f3a-9493-d4b1edc5cf19.png)
 
